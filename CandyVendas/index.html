@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rosa Digital - Produtos Digitais</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --black: #000000;
+            --dark: #111111;
+            --primary: #ff6fae;
+            --primary-dark: #ff3d8f;
+            --white: #ffffff;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--black);
+            color: var(--white);
+            line-height: 1.5;
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        .header {
+            position: sticky;
+            top: 0;
+            background: rgba(0,0,0,0.95);
+            backdrop-filter: blur(20px);
+            z-index: 100;
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--primary);
+            text-align: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Container */
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        /* Section */
+        .section {
+            padding: 2rem 0;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Product Card */
+        .product {
+            background: var(--dark);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border: 1px solid transparent;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,111,174,0.1), transparent);
+            transition: 0.5s;
+        }
+
+        .product:hover::before {
+            left: 100%;
+        }
+
+        .product:hover {
+            border-color: var(--primary);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(255,111,174,0.2);
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+            animation: pulse 2s infinite;
+        }
+
+        .tag-auto {
+            background: linear-gradient(135deg, #00ff88, #00cc6a);
+            color: #000;
+        }
+
+        .tag-manual {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: #000;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.03); }
+        }
+
+        .product-name {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .price {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .buy-btn {
+            width: 100%;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: #000;
+            border: none;
+            padding: 1rem;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .buy-btn:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 20px rgba(255,111,174,0.4);
+        }
+
+        /* WhatsApp Button */
+        .whatsapp-btn {
+            display: block;
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            color: white;
+            text-decoration: none;
+            padding: 1.2rem;
+            border-radius: 16px;
+            text-align: center;
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin: 1rem 0;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(37,211,102,0.3);
+        }
+
+        .whatsapp-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 24px rgba(37,211,102,0.4);
+        }
+
+        /* Support Info */
+        .support-info {
+            background: var(--dark);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            border: 1px solid rgba(255,111,174,0.3);
+            margin-bottom: 2rem;
+        }
+
+        .support-info p {
+            opacity: 0.8;
+            font-size: 0.9rem;
+        }
+
+        /* Terms */
+        .terms {
+            background: var(--dark);
+            border-radius: 12px;
+            padding: 1.5rem;
+            font-size: 0.85rem;
+            opacity: 0.7;
+            line-height: 1.4;
+        }
+
+        .terms ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .terms li {
+            margin-bottom: 0.5rem;
+            position: relative;
+            padding-left: 1rem;
+        }
+
+        .terms li::before {
+            content: "•";
+            color: var(--primary);
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.95);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            padding: 1rem;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: var(--dark);
+            border-radius: 20px;
+            padding: 2rem;
+            width: 100%;
+            max-width: 380px;
+            max-height: 90vh;
+            overflow-y: auto;
+            border: 2px solid var(--primary);
+            position: relative;
+            animation: slideUp 0.3s ease;
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(30px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .close {
+            position: absolute;
+            top: 1rem;
+            right: 1.5rem;
+            font-size: 2rem;
+            cursor: pointer;
+            color: var(--primary);
+        }
+
+        .success-icon {
+            font-size: 4rem;
+            color: #00ff88;
+            margin-bottom: 1rem;
+        }
+
+        .efi-container {
+            width: 100%;
+            height: 500px;
+            border-radius: 12px;
+            border: none;
+            margin-top: 1rem;
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--dark);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 3px;
+        }
+
+        /* Responsive */
+        @media (min-width: 768px) {
+            .container {
+                max-width: 500px;
+            }
+            
+            .product {
+                margin-bottom: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="logo">🌸 Rosa Digital</div>
+    </header>
+
+    <div class="container">
+        <!-- Produtos -->
+        <section class="section">
+            <h1 class="section-title">Produtos</h1>
+            
+            <div class="product" data-type="auto" data-price="47" data-name="Pack Premium">
+                <div class="tag tag-auto">⚡ Entrega Automática</div>
+                <div class="product-name">Pack Premium</div>
+                <div class="price">R$ 47</div>
+                <button class="buy-btn" onclick="buyProduct(this)">
+                    <i class="fas fa-bolt"></i> Comprar Agora
+                </button>
+            </div>
+
+            <div class="product" data-type="auto" data-price="97" data-name="Pack Master">
+                <div class="tag tag-auto">⚡ Entrega Automática</div>
+                <div class="product-name">Pack Master</div>
+                <div class="price">R$ 97</div>
+                <button class="buy-btn" onclick="buyProduct(this)">
+                    <i class="fas fa-bolt"></i> Comprar Agora
+                </button>
+            </div>
+
+            <div class="product" data-type="manual" data-price="197" data-name="Pack VIP">
+                <div class="tag tag-manual">🕒 Entrega Manual</div>
+                <div class="product-name">Pack VIP</div>
+                <div class="price">R$ 197</div>
+                <button class="buy-btn" onclick="buyProduct(this)">
+                    <i class="fas fa-clock"></i> Comprar Agora
+                </button>
+            </div>
+
+            <div class="product" data-type="auto" data-price="27" data-name="Pack Básico">
+                <div class="tag tag-auto">⚡ Entrega Automática</div>
+                <div class="product-name">Pack Básico</div>
+                <div class="price">R$ 27</div>
+                <button class="buy-btn" onclick="buyProduct(this)">
+                    <i class="fas fa-bolt"></i> Comprar Agora
+                </button>
+            </div>
+        </section>
+
+        <!-- Suporte -->
+        <section class="section">
+            <div class="support-info">
+                <p><strong>Suporte:</strong><br>
+                Segunda a Sábado<br>
+                09h às 22h</p>
+                <a href="https://wa.link/018qko" class="whatsapp-btn" target="_blank">
+                    <i class="fab fa-whatsapp"></i> Precisa de ajuda?
+                </a>
+            </div>
+        </section>
+
+        <!-- Termos -->
+        <section class="section">
+            <div class="terms">
+                <h3 style="color: var(--primary); margin-bottom: 1rem; font-size: 1.1rem;">Termos de Uso</h3>
+                <ul>
+                    <li>Produtos digitais entregues por email</li>
+                    <li>Sem reembolso após entrega</li>
+                    <li>Entrega automática ou manual (09h-22h)</li>
+                    <li>Pagamento seguro via Pix - Efí Bank</li>
+                </ul>
+            </div>
+        </section>
+    </div>
+
+    <!-- Modal Pagamento -->
+    <div id="paymentModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('paymentModal')">&times;</span>
+            <h2>Finalizar Compra</h2>
+            <div id="productDetails"></div>
+            <p style="text-align: center; margin: 1rem 0; opacity: 0.8;">
+                Pagamento seguro via Pix
+            </p>
+            <iframe id="efiIframe" class="efi-container" src=""></iframe>
+        </div>
+    </div>
+
+    <!-- Modal Sucesso Automático -->
+    <div id="autoModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('autoModal')">&times;</span>
+            <div style="text-align: center;">
+                <i class="fas fa-check-circle success-icon"></i>
+                <h2>✅ Entrega Automática!</h2>
+                <p style="font-size: 1.1rem; margin: 1rem 0;">
+                    Seu produto foi enviado para seu email!
+                </p>
+                <p style="opacity: 0.8;">Verifique caixa de entrada e spam</p>
+                <button class="buy-btn" onclick="closeModal('autoModal')" style="margin-top: 1rem;">
+                    Fechar
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Sucesso Manual -->
+    <div id="manualModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('manualModal')">&times;</span>
+            <div style="text-align: center;">
+                <i class="fas fa-clock success-icon" style="color: var(--primary);"></i>
+                <h2>📋 Pedido Recebido!</h2>
+                <p style="font-size: 1.1rem; margin: 1rem 0;">
+                    Seu pedido será entregue entre 09h e 22h
+                </p>
+                <button class="buy-btn" onclick="closeModal('manualModal')" style="margin-top: 1rem;">
+                    Fechar
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentProduct = {};
+
+        function buyProduct(btn) {
+            const product = btn.closest('.product');
+            currentProduct = {
+                type: product.dataset.type,
+                price: product.dataset.price,
+                name: product.dataset.name
+            };
+
+            // Simular integração Efí Bank
+            // Em produção, substitua por sua URL real do Efí
+            showPaymentModal();
+        }
+
+        function showPaymentModal() {
+            const modal = document.getElementById('paymentModal');
+            const details = document.getElementById('productDetails');
+            
+            details.innerHTML = `
+                <h3>${currentProduct.name}</h3>
+                <div class="price">R$ ${currentProduct.price}</div>
+            `;
+            
+            // URL simulada do Efí - SUBSTITUA PELA SUA URL REAL
+            const efiUrl = `https://seu-merchant.efibank.com.br/checkout?amount=${currentProduct.price}&product=${encodeURIComponent(currentProduct.name)}`;
+            document.getElementById('efiIframe').src = efiUrl;
+            
+            modal.style.display = 'flex';
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+            document.getElementById('efiIframe').src = '';
+        }
+
+        // Simular callback de pagamento aprovado (em produção use webhook do Efí)
+        function simulatePayment() {
+            setTimeout(() => {
+                document.getElementById('paymentModal').style.display = 'none';
+                
+                if (currentProduct.type === 'auto') {
+                    document.getElementById('autoModal').style.display = 'flex';
+                    // Aqui você enviaria o produto por email automaticamente
+                    console.log('Enviar produto por email:', currentProduct);
+                } else {
+                    document.getElementById('manualModal').style.display = 'flex';
+                }
+            }, 2000);
+        }
+
+        // Fechar modais clicando fora
+        window.onclick = function(event) {
+            const modals = document.querySelectorAll('.modal');
+            modals.forEach(modal => {
+                if (event.target === modal) {
+                    closeModal(modal.id);
+                }
+            });
+        }
+
+        // Scroll suave para links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Simular botão de pagamento no iframe (demo)
+        window.addEventListener('message', function(event) {
+            if (event.data === 'payment-approved') {
+                simulatePayment();
+            }
+        });
+    </script>
+</body>
+</html>
